@@ -1,11 +1,44 @@
 import { observable, computed } from 'utils';
 
 export default observable({
-  sponsors: {
-    items: [],
+  rotator: {
+    partners: [],
+    founders: [],
+    sponsors: [],
     activePage: 0,
-    @computed get pagesCount() {
-      return this.items.length ? Math.floor(Math.log2(this.items.length)) + 1 : 0;
+    @computed get totalPagesCount() {
+      const partnerPagesCount = this.partners.length ? 1 : 0;
+      const founderPagesCount = this.founders.length ? 1 : 0;
+
+      return this.sponsorPagesCount + partnerPagesCount + founderPagesCount;
+    },
+    @computed get sponsorPagesCount() {
+      const count = this.sponsors.length;
+
+      return count < 2 ? 1 :
+             count < 4 ? 2 :
+             count < 8 ? 3 : 4;
+    },
+    @computed get pages() {
+      let pages = [];
+
+      const divide = [
+        { index: 0, end: 1 },
+        { index: 1, end: 3 },
+        { index: 3, end: 7 },
+        { index: 7, end: 21 },
+      ];
+
+      for (let page = 0; page < this.sponsorPagesCount; page++) {
+        pages = pages.concat(
+          [this.sponsors.slice(divide[page].index, divide[page].end)]
+        );
+      }
+
+      pages = this.partners.length ? pages.concat([this.partners.slice(0, 14)]) : pages;
+      pages = this.founders.length ? pages.concat([this.founders.slice(0, 14)]) : pages;
+
+      return pages;
     },
   },
 });

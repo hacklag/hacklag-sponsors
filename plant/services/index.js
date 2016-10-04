@@ -1,5 +1,5 @@
-import sponsors from './sponsors';
+import rotator from './rotator';
 
 export default {
-  sponsors,
+  rotator,
 };

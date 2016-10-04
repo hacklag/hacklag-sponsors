@@ -2,26 +2,22 @@ import React, { PropTypes } from 'react';
 import { connect } from 'utils';
 import { Match, Miss } from 'react-router';
 
-import Sponsors from './Sponsors';
+import Rotator from './Rotator';
 import NotFound from './NotFound';
 
 
 const Routes = ({
   services: {
-    sponsors: {
-      fetch: fetchSponsors,
-      listen: watchSponsors,
-      rotateSponsors,
-    },
+    rotator: { fetch, listen, rotate },
   },
 }) => {
-  fetchSponsors();
-  watchSponsors();
-  rotateSponsors();
+  fetch();
+  listen();
+  rotate();
 
   return (
     <div>
-      <Match pattern="/" exactly component={Sponsors} />
+      <Match pattern="/" exactly component={Rotator} />
       <Miss component={NotFound} />
     </div>
   );
