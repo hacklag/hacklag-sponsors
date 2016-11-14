@@ -40,31 +40,47 @@ const renderSponsors = (sponsors) => (
   <div className={cn('Sponsors')}>
     <div className={cn('Sponsors__item', 'isPlatinum')}>
       <div className={cn('Sponsors__item-content')}>
-        <img
-          className={cn('Sponsors__item-logo')}
-          alt={sponsors[0] && sponsors[0].name}
-          src={sponsors[0] && sponsors[0].logo.value}
-        />
-        {sponsors[0] && (
-          <p className={cn('Sponsors__item-motto')}>{sponsors[0].motto}</p>
-        )}
-        {sponsors[0] && (
-          <p className={cn('Sponsors__item-description')}>{sponsors[0].description}</p>
-        )}
+        <div className={cn('Sponsors__item-content-wrapper')}>
+          <img
+            className={cn('Sponsors__item-logo')}
+            alt={sponsors[0] && sponsors[0].name}
+            src={sponsors[0] && sponsors[0].logo.value}
+          />
+          {sponsors[0] && (
+            <p className={cn('Sponsors__item-motto', {
+              isVisible: sponsors[0].motto,
+            })}>
+              {sponsors[0].motto}
+            </p>
+          )}
+          {sponsors[0] && (
+            <p className={cn('Sponsors__item-description', {
+              isVisible: sponsors[0].description,
+            })}>
+              {sponsors[0].description}
+            </p>
+          )}
+        </div>
       </div>
     </div>
     <div className={cn('Sponsors__item', 'isGold')}>
     {
       Array.from(Array(2).keys()).map((index) => (
         <div key={index + 1} className={cn('Sponsors__item-content')}>
-          <img
-            className={cn('Sponsors__item-logo')}
-            alt={sponsors[index + 1] && sponsors[index + 1].name}
-            src={sponsors[index + 1] && sponsors[index + 1].logo.value}
-          />
-          {sponsors[index + 1] && (
-            <p className={cn('Sponsors__item-motto')}>{sponsors[index + 1].motto}</p>
-          )}
+          <div className={cn('Sponsors__item-content-wrapper')}>
+            <img
+              className={cn('Sponsors__item-logo')}
+              alt={sponsors[index + 1] && sponsors[index + 1].name}
+              src={sponsors[index + 1] && sponsors[index + 1].logo.value}
+            />
+            {sponsors[index + 1] && (
+              <p className={cn('Sponsors__item-motto', {
+                isVisible: sponsors[index + 1].motto,
+              })}>
+                {sponsors[index + 1].motto}
+              </p>
+            )}
+          </div>
         </div>
       ))
     }
@@ -73,14 +89,13 @@ const renderSponsors = (sponsors) => (
     {
       Array.from(Array(3).keys()).map((index) => (
         <div key={index + 3} className={cn('Sponsors__item-content')}>
-          <img
-            className={cn('Sponsors__item-logo')}
-            alt={sponsors[index + 3] && sponsors[index + 3].name}
-            src={sponsors[index + 3] && sponsors[index + 3].logo.value}
-          />
-          {sponsors[index + 3] && (
-            <p className={cn('Sponsors__item-motto')}>{sponsors[index + 3].motto}</p>
-          )}
+          <div className={cn('Sponsors__item-content-wrapper')}>
+            <img
+              className={cn('Sponsors__item-logo')}
+              alt={sponsors[index + 3] && sponsors[index + 3].name}
+              src={sponsors[index + 3] && sponsors[index + 3].logo.value}
+            />
+          </div>
         </div>
       ))
     }
@@ -89,11 +104,13 @@ const renderSponsors = (sponsors) => (
     {
       Array.from(Array(4).keys()).map((index) => (
         <div key={index + 6} className={cn('Sponsors__item-content')}>
-          <img
-            className={cn('Sponsors__item-logo')}
-            alt={sponsors[index + 6] && sponsors[index + 6].name}
-            src={sponsors[index + 6] && sponsors[index + 6].logo.value}
-          />
+          <div className={cn('Sponsors__item-content-wrapper')}>
+            <img
+              className={cn('Sponsors__item-logo')}
+              alt={sponsors[index + 6] && sponsors[index + 6].name}
+              src={sponsors[index + 6] && sponsors[index + 6].logo.value}
+            />
+          </div>
         </div>
       ))
     }

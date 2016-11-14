@@ -60,39 +60,51 @@
 .Sponsors {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-direction: column;
-  height: 100%;
   width: 100%;
-  padding: 60px 0 40px;
+  padding: 30px;
 
   &__item {
     text-align: center;
     width: 100%;
-
-    &:not(:first-child) {
-      display: flex;
-      justify-content: space-around;
-      width: 100%;
-    }
+    display: flex;
 
     &-content {
-      height: 100%;
-      width: auto;
-      background-color: #F5F5F5;
-      margin: 0 auto;
-      padding: 0 0 7px;
+      background-color: #FAFAFA;
+      margin: 10px;
       transition: opacity .5s ease-in-out .1s, transform .5s ease .15s;
       opacity: 0;
       transform: translateY(50px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      position: relative;
 
-      & > p {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      &:before{
+      	content: "";
+      	display: block;
+      	padding-top: 25.6%; /* Aspect ratio 3.9:1 */
+      }
+
+      &-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        & > p {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          display: none;
+
+          &.isVisible {
+            display: block;
+          }
+
+        }
       }
 
       .isActive & {
@@ -103,40 +115,42 @@
 
       .isPlatinum & {
         width: 99%;
-        height: 20em;
       }
 
       .isGold & {
         width: 49%;
-        height: 15em;
       }
 
       .isSilver & {
         width: 32%;
-        height: 10em;
       }
 
       .isBronze & {
         width: 24%;
-        height: 7em;
       }
     }
 
     &-logo {
       display: block;
-      margin: 7px auto;
       width: auto;
-      max-width: 80%;
-      max-height: 50%;
+      max-width: 70%;
+      max-height: 70%;
+      padding: 10px;
+
+      .isSilver &,
+      .isBronze & {
+        max-width: 90%;
+        max-height: 90%;
+      }
     }
 
     &-motto {
       max-width: 90%;
-      margin: 30px auto 0;
       color: #333;
       font-size: 2em;
       font-weight: 300;
       line-height: 2em;
+      margin: 10px;
 
       .isGold & {
         font-size: 1.7em;
@@ -152,8 +166,8 @@
     &-description {
       font-size: 1.1em;
       color: #666;
-      max-width: 85%;;
-      margin: 15px auto 0;
+      max-width: 85%;
+      margin-bottom: 10px;
     }
   }
 }
