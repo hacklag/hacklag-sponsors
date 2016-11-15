@@ -90,11 +90,13 @@ const renderSponsors = (sponsors) => (
       Array.from(Array(3).keys()).map((index) => (
         <div key={index + 3} className={cn('Sponsors__item-content')}>
           <div className={cn('Sponsors__item-content-wrapper')}>
-            <img
-              className={cn('Sponsors__item-logo')}
-              alt={sponsors[index + 3] && sponsors[index + 3].name}
-              src={sponsors[index + 3] && sponsors[index + 3].logo.value}
-            />
+            {sponsors[index + 3] &&
+              <img
+                className={cn('Sponsors__item-logo')}
+                alt={sponsors[index + 3].name}
+                src={sponsors[index + 3].logo.value}
+              />
+            }
           </div>
         </div>
       ))
@@ -103,13 +105,15 @@ const renderSponsors = (sponsors) => (
     <div className={cn('Sponsors__item', 'isBronze')}>
     {
       Array.from(Array(4).keys()).map((index) => (
-        <div key={index + 6} className={cn('Sponsors__item-content')}>
+        <div key={index + 3} className={cn('Sponsors__item-content')}>
           <div className={cn('Sponsors__item-content-wrapper')}>
-            <img
-              className={cn('Sponsors__item-logo')}
-              alt={sponsors[index + 6] && sponsors[index + 6].name}
-              src={sponsors[index + 6] && sponsors[index + 6].logo.value}
-            />
+            {sponsors[index + 3] &&
+              <img
+                className={cn('Sponsors__item-logo')}
+                alt={sponsors[index + 3].name}
+                src={sponsors[index + 3].logo.value}
+              />
+            }
           </div>
         </div>
       ))

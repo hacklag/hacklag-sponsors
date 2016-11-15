@@ -19,8 +19,8 @@ const Routes = ({
 
   return (
     <div>
-      <Match pattern="/" exactly component={Rotator} />
-      <Match pattern="/pyramid" exactly component={Pyramid} />
+      <Match pattern="/" exactly component={Pyramid} />
+      <Match pattern="/pyramid" exactly component={Rotator} />
       <Miss component={NotFound} />
     </div>
   );
