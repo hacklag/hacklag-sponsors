@@ -105,13 +105,13 @@ const renderSponsors = (sponsors) => (
     <div className={cn('Sponsors__item', 'isBronze')}>
     {
       Array.from(Array(4).keys()).map((index) => (
-        <div key={index + 3} className={cn('Sponsors__item-content')}>
+        <div key={index + 6} className={cn('Sponsors__item-content')}>
           <div className={cn('Sponsors__item-content-wrapper')}>
-            {sponsors[index + 3] &&
+            {sponsors[index + 6] &&
               <img
                 className={cn('Sponsors__item-logo')}
-                alt={sponsors[index + 3].name}
-                src={sponsors[index + 3].logo.value}
+                alt={sponsors[index + 6].name}
+                src={sponsors[index + 6].logo.value}
               />
             }
           </div>

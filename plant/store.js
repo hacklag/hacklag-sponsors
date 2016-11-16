@@ -45,9 +45,9 @@ export default observable({
     @computed get pyramidPages() {
       let pages = [];
 
-      pages = this.sponsors.length ? pages.concat([this.sponsors.slice(0, 9)]) : pages;
-      pages = this.partners.length ? pages.concat([this.partners.slice(0, 14)]) : pages;
-      pages = this.founders.length ? pages.concat([this.founders.slice(0, 14)]) : pages;
+      pages = this.sponsors.length ? pages.concat([this.sponsors.slice(0, 10)]) : pages;
+      pages = this.partners.length ? pages.concat([this.partners.slice(0, 12)]) : pages;
+      pages = this.founders.length ? pages.concat([this.founders.slice(0, 12)]) : pages;
 
       return pages;
     },
