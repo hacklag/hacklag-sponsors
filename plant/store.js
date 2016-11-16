@@ -13,6 +13,7 @@ export default observable({
 
       return this.sponsorPagesCount + partnerPagesCount + founderPagesCount;
     },
+
     @computed get sponsorPagesCount() {
       const count = this.sponsors.length;
 
@@ -20,16 +21,19 @@ export default observable({
              count < 4 ? 2 :
              count < 8 ? 3 : 4;
     },
+
     @computed get partnersPageCount() {
       const count = this.partners.length / 12;
 
       return count % 1 === 0 ? count : parseInt(count + 1, 10);
     },
+
     @computed get foundersPageCount() {
       const count = this.founders.length / 12;
 
       return count % 1 === 0 ? count : parseInt(count + 1, 10);
     },
+
     @computed get pages() {
       let pages = [];
 
