@@ -5,15 +5,15 @@ import styles from './styles.scss';
 const cn = require('classnames/bind').bind(styles);
 
 const Pyramid = ({
-  store: { rotator: { pyramidActivePage, pyramidPages } },
+  store: { rotator: { pyramidActivePage, pyramidPages, partnersPageCount, foundersPageCount } },
 }) => (
   <div className={cn('View')}>
     <div className={cn('Pages')}>
       <h1 className={cn('Pages__title', {
-        isVisible: pyramidActivePage === 1,
+        isVisible: pyramidActivePage > 0 && pyramidActivePage <= partnersPageCount,
       })}>Partners</h1>
       <h1 className={cn('Pages__title', {
-        isVisible: pyramidActivePage === 2,
+        isVisible: pyramidActivePage > partnersPageCount && pyramidActivePage <= (foundersPageCount + partnersPageCount),
       })}>Founders</h1>
 
       {pyramidPages.map((pageRotator, pageIndex) => (
