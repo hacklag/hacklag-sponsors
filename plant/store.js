@@ -6,6 +6,7 @@ export default observable({
     founders: [],
     sponsors: [],
     activePage: 0,
+    pyramidActivePage: 0,
     @computed get totalPagesCount() {
       const partnerPagesCount = this.partners.length ? 1 : 0;
       const founderPagesCount = this.founders.length ? 1 : 0;
@@ -37,6 +38,16 @@ export default observable({
 
       pages = this.partners.length ? pages.concat([this.partners.slice(0, 14)]) : pages;
       pages = this.founders.length ? pages.concat([this.founders.slice(0, 14)]) : pages;
+
+      return pages;
+    },
+
+    @computed get pyramidPages() {
+      let pages = [];
+
+      pages = this.sponsors.length ? pages.concat([this.sponsors.slice(0, 10)]) : pages;
+      pages = this.partners.length ? pages.concat([this.partners.slice(0, 12)]) : pages;
+      pages = this.founders.length ? pages.concat([this.founders.slice(0, 12)]) : pages;
 
       return pages;
     },
