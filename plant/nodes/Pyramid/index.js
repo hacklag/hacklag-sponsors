@@ -5,15 +5,15 @@ import styles from './styles.scss';
 const cn = require('classnames/bind').bind(styles);
 
 const Pyramid = ({
-  store: { rotator: { pyramidActivePage, pyramidPages } },
+  store: { rotator: { pyramidActivePage, pyramidPages, partnersPageCount, foundersPageCount } },
 }) => (
   <div className={cn('View')}>
     <div className={cn('Pages')}>
       <h1 className={cn('Pages__title', {
-        isVisible: pyramidActivePage === 1,
+        isVisible: pyramidActivePage > 0 && pyramidActivePage <= partnersPageCount,
       })}>Partners</h1>
       <h1 className={cn('Pages__title', {
-        isVisible: pyramidActivePage === 2,
+        isVisible: pyramidActivePage > partnersPageCount && pyramidActivePage <= (foundersPageCount + partnersPageCount),
       })}>Founders</h1>
 
       {pyramidPages.map((pageRotator, pageIndex) => (
@@ -25,7 +25,7 @@ const Pyramid = ({
               isActive: pyramidActivePage === pageIndex,
             })}
           >
-            {pageIndex > 0 ? pageRotator.map(renderGrid) : renderSponsors(pageRotator)}
+            {pageIndex > 0 ? renderGrid(pageRotator) : renderSponsors(pageRotator)}
           </div>
         </div>
       ))}
@@ -122,12 +122,16 @@ const renderSponsors = (sponsors) => (
   </div>
 );
 
-const renderGrid = (partner) => (
-  <div key={partner.name} className={cn('Grid__item')}>
-    <div className={cn('Grid__item-logo-wrap')}>
-      <img className={cn('Grid__item-logo')} alt={partner.name} src={partner.logo.value} />
+const renderGrid = (partners) => (
+  Array.from(Array(12).keys()).map((index) => (
+    <div key={index} className={cn('Grid__item')}>
+      <div className={cn('Grid__item-logo-wrap')}>
+      {partners[index] &&
+        <img className={cn('Grid__item-logo')} alt={partners[index].name} src={partners[index].logo.value} />
+      }
+      </div>
     </div>
-  </div>
+  ))
 );
 
 Pyramid.propTypes = {

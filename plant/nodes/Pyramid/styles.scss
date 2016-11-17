@@ -50,9 +50,9 @@
     }
 
     &.isGrid {
-      align-items: center;
       flex-flow: row wrap;
       margin-top: 90px;
+      width: 100%;
     }
   }
 }
@@ -175,15 +175,15 @@
 .Grid {
   &__item {
     text-align: center;
-    width: 25%;
-    margin-bottom: 30px;
+    width: 24%;
 
     &-logo-wrap {
+      background-color: #FAFAFA;
       opacity: 0;
       transition: opacity .5s ease-in-out .1s, transform .5s ease .15s;
       max-width: 480px;
       height: 150px;
-      margin: 0 auto 30px;
+      margin: 10px;
       display: flex;
       align-items: center;
       transform: translateY(50px);

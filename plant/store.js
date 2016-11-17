@@ -13,6 +13,7 @@ export default observable({
 
       return this.sponsorPagesCount + partnerPagesCount + founderPagesCount;
     },
+
     @computed get sponsorPagesCount() {
       const count = this.sponsors.length;
 
@@ -20,6 +21,19 @@ export default observable({
              count < 4 ? 2 :
              count < 8 ? 3 : 4;
     },
+
+    @computed get partnersPageCount() {
+      const count = this.partners.length / 12;
+
+      return count % 1 === 0 ? count : parseInt(count + 1, 10);
+    },
+
+    @computed get foundersPageCount() {
+      const count = this.founders.length / 12;
+
+      return count % 1 === 0 ? count : parseInt(count + 1, 10);
+    },
+
     @computed get pages() {
       let pages = [];
 
@@ -46,8 +60,16 @@ export default observable({
       let pages = [];
 
       pages = this.sponsors.length ? pages.concat([this.sponsors.slice(0, 10)]) : pages;
-      pages = this.partners.length ? pages.concat([this.partners.slice(0, 12)]) : pages;
-      pages = this.founders.length ? pages.concat([this.founders.slice(0, 12)]) : pages;
+      for (let page = 0; page < this.partnersPageCount; page++) {
+        pages = pages.concat(
+          [this.partners.slice((12 * page), (12 * page) + 12)]
+        );
+      }
+      for (let page = 0; page < this.foundersPageCount; page++) {
+        pages = pages.concat(
+          [this.founders.slice((12 * page), (12 * page) + 12)]
+        );
+      }
 
       return pages;
     },
