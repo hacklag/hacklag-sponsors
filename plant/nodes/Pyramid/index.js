@@ -25,7 +25,7 @@ const Pyramid = ({
               isActive: pyramidActivePage === pageIndex,
             })}
           >
-            {pageIndex > 0 ? pageRotator.map(renderGrid) : renderSponsors(pageRotator)}
+            {pageIndex > 0 ? renderGrid(pageRotator) : renderSponsors(pageRotator)}
           </div>
         </div>
       ))}
@@ -122,12 +122,16 @@ const renderSponsors = (sponsors) => (
   </div>
 );
 
-const renderGrid = (partner) => (
-  <div key={partner.name} className={cn('Grid__item')}>
-    <div className={cn('Grid__item-logo-wrap')}>
-      <img className={cn('Grid__item-logo')} alt={partner.name} src={partner.logo.value} />
+const renderGrid = (partners) => (
+  Array.from(Array(12).keys()).map((index) => (
+    <div key={index} className={cn('Grid__item')}>
+      <div className={cn('Grid__item-logo-wrap')}>
+      {partners[index] &&
+        <img className={cn('Grid__item-logo')} alt={partners[index].name} src={partners[index].logo.value} />
+      }
+      </div>
     </div>
-  </div>
+  ))
 );
 
 Pyramid.propTypes = {
