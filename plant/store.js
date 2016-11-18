@@ -6,20 +6,18 @@ export default observable({
     founders: [],
     sponsors: [],
     activePage: 0,
-    pyramidActivePage: 0,
     @computed get totalPagesCount() {
-      const partnerPagesCount = this.partners.length ? 1 : 0;
-      const founderPagesCount = this.founders.length ? 1 : 0;
-
-      return this.sponsorPagesCount + partnerPagesCount + founderPagesCount;
+      return this.sponsorsPagesCount + this.partnersPageCount + this.foundersPageCount;
     },
 
-    @computed get sponsorPagesCount() {
+    @computed get sponsorsPagesCount() {
       const count = this.sponsors.length;
+      const gridSponsorsCount = (count - 7) / 12;
 
       return count < 2 ? 1 :
              count < 4 ? 2 :
-             count < 8 ? 3 : 4;
+             count < 8 ? 3 :
+             gridSponsorsCount % 1 === 0 ? (gridSponsorsCount + 3) : parseInt((gridSponsorsCount + 4), 10);
     },
 
     @computed get partnersPageCount() {
@@ -35,36 +33,29 @@ export default observable({
     },
 
     @computed get pages() {
-      let pages = [];
-
       const divide = [
         { index: 0, end: 1 },
         { index: 1, end: 3 },
         { index: 3, end: 7 },
-        { index: 7, end: 21 },
+        { index: 8, end: 20 },
       ];
+      let pages = [];
 
-      for (let page = 0; page < this.sponsorPagesCount; page++) {
+      for (let page = 0; page < this.sponsorsPagesCount; page++) {
         pages = pages.concat(
-          [this.sponsors.slice(divide[page].index, divide[page].end)]
+          [this.sponsors.slice(
+            page < 4 ? divide[page].index : divide[page].end + (12 * (page - 4)),
+            page < 4 ? divide[page].end : divide[page].end + (12 * (page - 4)) + 12,
+          )]
         );
       }
 
-      pages = this.partners.length ? pages.concat([this.partners.slice(0, 14)]) : pages;
-      pages = this.founders.length ? pages.concat([this.founders.slice(0, 14)]) : pages;
-
-      return pages;
-    },
-
-    @computed get pyramidPages() {
-      let pages = [];
-
-      pages = this.sponsors.length ? pages.concat([this.sponsors.slice(0, 10)]) : pages;
       for (let page = 0; page < this.partnersPageCount; page++) {
         pages = pages.concat(
           [this.partners.slice((12 * page), (12 * page) + 12)]
         );
       }
+
       for (let page = 0; page < this.foundersPageCount; page++) {
         pages = pages.concat(
           [this.founders.slice((12 * page), (12 * page) + 12)]

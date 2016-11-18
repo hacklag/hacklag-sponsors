@@ -9,7 +9,7 @@ export default class Rotator {
     this.rotate = this.rotate.bind(this);
   }
 
-  @action rotate = (time = 5000) => {
+  @action rotate = (time = 2000) => {
     setInterval(() => {
       const { activePage, totalPagesCount } = this.store.rotator;
 

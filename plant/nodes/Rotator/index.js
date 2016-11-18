@@ -5,29 +5,33 @@ import styles from './styles.scss';
 const cn = require('classnames/bind').bind(styles);
 
 const Rotator = ({
-  store: { rotator: { activePage, pages, sponsorPagesCount, totalPagesCount } },
+  store: { rotator: { activePage, pages, sponsorsPagesCount, partnersPageCount } },
 }) => (
   <div className={cn('View')}>
     <div className={cn('Pages')}>
       <h1 className={cn('Pages__title', {
-        isVisible: totalPagesCount - 2 === activePage,
+        isVisible: activePage > 0 && activePage < sponsorsPagesCount,
+      })}>Sponsors</h1>
+      <h1 className={cn('Pages__title', {
+        isVisible: activePage >= sponsorsPagesCount && activePage < (partnersPageCount + sponsorsPagesCount),
       })}>Partners</h1>
       <h1 className={cn('Pages__title', {
-        isVisible: totalPagesCount - 1 === activePage,
+        isVisible: activePage >= (partnersPageCount + sponsorsPagesCount),
       })}>Founders</h1>
       {pages.map((pageRotator, pageIndex) => (
         <div key={pageIndex} className={cn('Pages__item')}>
           <div
-            className={cn('Rotator', {
-              isPlatinum: pageIndex === 0 && (sponsorPagesCount - 1) >= pageIndex,
-              isGold: pageIndex === 1 && (sponsorPagesCount - 1) >= pageIndex,
-              isSilver: pageIndex === 2 && (sponsorPagesCount - 1) >= pageIndex,
-              isBronze: pageIndex === 3 && (sponsorPagesCount - 1) >= pageIndex,
-              isGrid: sponsorPagesCount <= pageIndex,
+            className={cn('Pages__content', {
+              isGrid: pageIndex > 0,
               isActive: activePage === pageIndex,
             })}
           >
-            {pageRotator.map(renderSponsor)}
+            {pageIndex > 0 ? renderGrid(
+              pageRotator,
+              pageIndex === 1 && sponsorsPagesCount > 0 ? 2 :
+              pageIndex === 2 && sponsorsPagesCount > 1 ? 4 : 12,
+              ) :
+              pageRotator.map(renderSponsor)}
           </div>
         </div>
       ))}
@@ -39,17 +43,38 @@ const Rotator = ({
 );
 
 const renderSponsor = (sponsor) => (
-  <div key={sponsor.name} className={cn('Rotator__item')}>
-    <div className={cn('Rotator__item-logo-wrap')}>
-      <img className={cn('Rotator__item-logo')} alt={sponsor.name} src={sponsor.logo.value} />
+  <div key={sponsor.name} className={cn('Sponsor__item')}>
+    <div className={cn('Sponsor__item-logo-wrap')}>
+      <img className={cn('Sponsor__item-logo')} alt={sponsor.name} src={sponsor.logo.value} />
     </div>
     {sponsor.motto && (
-      <p className={cn('Rotator__item-motto')}>{sponsor.motto}</p>
+      <p className={cn('Sponsor__item-motto')}>{sponsor.motto}</p>
     )}
     {sponsor.description && (
-      <p className={cn('Rotator__item-description')}>{sponsor.description}</p>
+      <p className={cn('Sponsor__item-description')}>{sponsor.description}</p>
     )}
   </div>
+);
+
+const renderGrid = (items, gridElements) => (
+  Array.from(Array(gridElements).keys()).map((index) => (
+    <div key={index}
+      className={cn('Grid__item', {
+        isSponsors: gridElements < 12,
+        isGold: gridElements === 2,
+        isSilver: gridElements === 4,
+      })}
+    >
+      <div className={cn('Grid__item-logo-wrap')}>
+      {items[index] &&
+        <img className={cn('Grid__item-logo')} alt={items[index].name} src={items[index].logo.value} />
+      }
+      {items[index] && (
+        <p className={cn('Grid__item-motto', { isVisible: items[index].motto })}>{items[index].motto}</p>
+      )}
+      </div>
+    </div>
+  ))
 );
 
 Rotator.propTypes = {
