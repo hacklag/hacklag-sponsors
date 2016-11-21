@@ -65,13 +65,15 @@ const renderGrid = (items, gridElements) => (
         isSilver: gridElements === 4,
       })}
     >
-      <div className={cn('Grid__item-logo-wrap')}>
-      {items[index] &&
-        <img className={cn('Grid__item-logo')} alt={items[index].name} src={items[index].logo.value} />
-      }
-      {items[index] && (
-        <p className={cn('Grid__item-motto', { isVisible: items[index].motto })}>{items[index].motto}</p>
-      )}
+      <div className={cn('Grid__item-content')}>
+        <div className={cn('Grid__item-logo-wrap')}>
+        {items[index] &&
+          <img className={cn('Grid__item-logo')} alt={items[index].name} src={items[index].logo.value} />
+        }
+        </div>
+        {items[index] && (
+          <p className={cn('Grid__item-motto', { isVisible: items[index].motto })}>{items[index].motto}</p>
+        )}
       </div>
     </div>
   ))

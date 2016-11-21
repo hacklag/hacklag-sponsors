@@ -9,20 +9,11 @@ export default class Rotator {
     this.rotate = this.rotate.bind(this);
   }
 
-  @action rotate = (time = 2000) => {
+  @action rotate = (time = 5000) => {
     setInterval(() => {
       const { activePage, totalPagesCount } = this.store.rotator;
 
       this.store.rotator.activePage = (activePage + 1) % totalPagesCount;
-    }, time);
-  }
-
-  @action pyramidRotate = (time = 5000) => {
-    setInterval(() => {
-      const { pyramidActivePage, partnersPageCount, foundersPageCount } = this.store.rotator;
-      const totalPagesCount = partnersPageCount + foundersPageCount + 1;
-
-      this.store.rotator.pyramidActivePage = (pyramidActivePage + 1) % totalPagesCount;
     }, time);
   }
 
