@@ -44,8 +44,8 @@ export default observable({
       for (let page = 0; page < this.sponsorsPagesCount; page++) {
         pages = pages.concat(
           [this.sponsors.slice(
-            page < 4 ? divide[page].index : divide[page].end + (12 * (page - 4)),
-            page < 4 ? divide[page].end : divide[page].end + (12 * (page - 4)) + 12,
+            page < 4 ? divide[page].index : divide[3].end + (12 * (page - 4)),
+            page < 4 ? divide[page].end : divide[3].end + (12 * (page - 4)) + 12,
           )]
         );
       }
