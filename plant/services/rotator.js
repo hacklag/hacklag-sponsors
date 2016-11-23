@@ -17,15 +17,6 @@ export default class Rotator {
     }, time);
   }
 
-  @action pyramidRotate = (time = 5000) => {
-    setInterval(() => {
-      const { pyramidActivePage, partnersPageCount, foundersPageCount } = this.store.rotator;
-      const totalPagesCount = partnersPageCount + foundersPageCount + 1;
-
-      this.store.rotator.pyramidActivePage = (pyramidActivePage + 1) % totalPagesCount;
-    }, time);
-  }
-
   @action fetch = async () => {
     const { objects } = await request.get(PARTNERS_URL);
 

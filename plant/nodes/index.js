@@ -2,22 +2,22 @@ import React, { PropTypes } from 'react';
 import { connect } from 'utils';
 import { Match, Miss } from 'react-router';
 
-import Pyramid from './Pyramid';
+import Rotator from './Rotator';
 import NotFound from './NotFound';
 
 
 const Routes = ({
   services: {
-    rotator: { fetch, listen, pyramidRotate },
+    rotator: { fetch, listen, rotate },
   },
 }) => {
   fetch();
   listen();
-  pyramidRotate();
+  rotate();
 
   return (
     <div>
-      <Match pattern="/" exactly component={Pyramid} />
+      <Match pattern="/" exactly component={Rotator} />
       <Miss component={NotFound} />
     </div>
   );
